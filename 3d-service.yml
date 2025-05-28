@@ -1,3 +1,11 @@
+api-service:
+  url: http://api-service:8771
+core-service:
+  url: http://core-service:8762
+mp-import-service:
+  url: http://localhost:12120/MPImport
+
+
 eureka:
   client:
     serviceUrl:
@@ -5,7 +13,26 @@ eureka:
   instance:
     prefer-ip-address: true
 
+server:
+  port: 8767
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000   # Thời gian chờ kết nối (ms)
+        readTimeout: 5000      # Thời gian chờ đọc dữ liệu (ms)
+        loggerLevel: FULL      # Log chi tiết request & response
+
 spring:
+  servlet:
+    # Giới hạn kích thước file tải lên
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+      # Giới hạn tổng số lượng file tải lên
+      file-size-threshold: 2MB
+
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     url: jdbc:sqlserver://192.168.1.223:1433;databaseName=PRODUCTION;encrypt=false;trustServerCertificate=true;
@@ -14,3 +41,10 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/AlvaDB
+
+swagger:
+  enabled: true
+
+logging:
+  level:
+    org.springframework: ERROR

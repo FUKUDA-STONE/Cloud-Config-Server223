@@ -1,10 +1,11 @@
-core-service: 
-  url: http://localhost:8762
+core-service:
+  url: http://core-service:8762
+
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://discovery-server:8761/eureka
   instance:
     prefer-ip-address: true
 
@@ -19,16 +20,10 @@ spring:
       matching-strategy: ant_path_matcher
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://192.168.1.223:1433;databaseName=PRODUCTION;encrypt=false;trustServerCertificate=true;
+    url: jdbc:sqlserver://sql-server:1433;databaseName=PRODUCTION;encrypt=false;trustServerCertificate=true;
     username: sa
     password: dev*2304
-  servlet:
-    # Giới hạn kích thước file tải lên
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
-      # Giới hạn tổng số lượng file tải lên
-      file-size-threshold: 2MB
+
 
 swagger:
   enabled: true
